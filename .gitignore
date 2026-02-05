@@ -4,6 +4,7 @@ iff# Tapestry 5.9 IntelliJ Plugin - Git Ignore
 .gradle/
 build/
 !gradle/wrapper/gradle-wrapper.jar
+.idea/workspace.xml
 
 # IntelliJ IDEA
 .idea/
