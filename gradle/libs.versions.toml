@@ -1,0 +1,29 @@
+# Tapestry 5.9 IntelliJ Plugin - Version Catalog
+#
+# This file defines all dependency versions in a centralized location.
+# See: https://docs.gradle.org/current/userguide/platforms.html
+
+[versions]
+# IntelliJ Platform Gradle Plugin
+intellij-platform = "2.5.0"
+
+# Testing
+junit = "5.10.2"
+assertj = "3.25.3"
+
+[plugins]
+# IntelliJ Platform Gradle Plugin 2.x
+intellij-platform = { id = "org.jetbrains.intellij.platform", version.ref = "intellij-platform" }
+
+[libraries]
+# JUnit 5 for testing
+junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+junit-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit" }
+
+# AssertJ for fluent assertions
+assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+
+[bundles]
+# Test dependencies bundle
+testing = ["junit-api", "junit-engine", "junit-params", "assertj-core"]

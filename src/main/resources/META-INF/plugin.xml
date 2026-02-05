@@ -1,0 +1,99 @@
+<!--
+  ~ Tapestry 5.9 IntelliJ Plugin - Plugin Descriptor
+  ~
+  ~ This file registers all extension points and actions for the plugin.
+  ~ Plugin metadata (id, name, version, description) is configured in build.gradle.kts
+  ~ and will be merged with this file during build.
+  ~
+  ~ @see https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html
+  -->
+<idea-plugin>
+    <!-- Plugin dependencies -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+    <depends>com.intellij.modules.xml</depends>
+
+    <!-- Extension points registration -->
+    <extensions defaultExtensionNs="com.intellij">
+        <!--
+          ===== CODE COMPLETION =====
+          Provides code completion for Tapestry property expressions in TML files.
+        -->
+        <!-- TODO: Phase 4 - Uncomment when completion is implemented
+        <completion.contributor
+            language="XML"
+            implementationClass="com.juneenergy.intellij.tapestry5.completion.Tapestry5CompletionContributor"
+            order="first"/>
+        -->
+
+        <!--
+          ===== NAVIGATION =====
+          Provides Go to Declaration for property expressions and component references.
+        -->
+        <!-- TODO: Phase 5 - Uncomment when navigation is implemented
+        <gotoDeclarationHandler
+            implementation="com.juneenergy.intellij.tapestry5.navigation.PropertyExpressionGoToHandler"
+            order="first"/>
+        <gotoDeclarationHandler
+            implementation="com.juneenergy.intellij.tapestry5.navigation.ComponentReferenceGoToHandler"
+            order="first"/>
+        -->
+
+        <!--
+          ===== LINE MARKERS =====
+          Shows gutter icons linking Java classes to TML templates and vice versa.
+        -->
+        <!-- TODO: Phase 8 - Uncomment when line markers are implemented
+        <codeInsight.lineMarkerProvider
+            language="JAVA"
+            implementationClass="com.juneenergy.intellij.tapestry5.markers.Tapestry5LineMarkerProvider"/>
+        <codeInsight.lineMarkerProvider
+            language="XML"
+            implementationClass="com.juneenergy.intellij.tapestry5.markers.TmlLineMarkerProvider"/>
+        -->
+
+        <!--
+          ===== INSPECTIONS =====
+          Code inspections for common Tapestry issues.
+        -->
+        <!-- TODO: Phase 7 - Uncomment when inspections are implemented
+        <localInspection
+            language="JAVA"
+            groupPath="Tapestry"
+            groupBundle="messages.TapestryBundle"
+            groupKey="inspection.group.name"
+            enabledByDefault="true"
+            level="WARNING"
+            implementationClass="com.juneenergy.intellij.tapestry5.inspections.MissingTemplateInspection"
+            key="inspection.missing.template.name"
+            bundle="messages.TapestryBundle"/>
+        -->
+    </extensions>
+
+    <!-- Actions registration -->
+    <actions>
+        <!--
+          ===== FILE SWITCHER =====
+          Action to switch between TML template and Java class files.
+          Keyboard shortcut: Ctrl+Alt+Shift+T (configurable)
+        -->
+        <action
+            id="tapestry5.switcher"
+            class="com.juneenergy.intellij.tapestry5.Tapestry5Switcher"
+            text="Switch Tapestry TML/Java"
+            description="Switch between TML template and Java class">
+            <add-to-group group-id="GoToMenu" anchor="after" relative-to-action="GotoRelated"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <keyboard-shortcut first-keystroke="control alt shift T" keymap="$default"/>
+        </action>
+    </actions>
+
+    <!-- Notification group for plugin messages -->
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup
+            id="Tapestry5Notifications"
+            displayType="BALLOON"
+            bundle="messages.TapestryBundle"
+            key="notification.group.tapestry5"/>
+    </extensions>
+</idea-plugin>

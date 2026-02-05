@@ -4,41 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="296c424f-4037-41ad-9df4-b3143f871d9b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/META-INF/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/builds/intellij-tapestry4-v.0.4.zip" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/builds/intellij-tapestry4-v.0.4.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/builds/intellij-tapestry4-v.0.5.zip" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/builds/intellij-tapestry4-v.0.5.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/builds/intellij-tapestry4-v.0.6.1.zip" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/builds/intellij-tapestry4-v.0.6.1.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/builds/intellij-tapestry4-v.0.6.zip" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/builds/intellij-tapestry4-v.0.6.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/guava-17.0-sources.jar" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/lib/guava-17.0-sources.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/guava-17.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/lib/guava-17.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/mockito-all-1.9.5-javadoc.jar" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/lib/mockito-all-1.9.5-javadoc.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/mockito-all-1.9.5-sources.jar" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/lib/mockito-all-1.9.5-sources.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/mockito-all-1.9.5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/lib/mockito-all-1.9.5.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ch/mjava/intellij/PluginHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/ch/mjava/intellij/PluginHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/icons/tapestry_unicorn.png" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/icons/tapestry_unicorn.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/TapestrySwitcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/TapestrySwitcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/codeInsight/JwcidGoToComponentDeclarationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/codeInsight/JwcidGoToComponentDeclarationHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/codeInsight/OgnlGoToDeclarationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/codeInsight/OgnlGoToDeclarationHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/completion/PropertyCompletionContributor.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/completion/PropertyCompletionContributor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/ognl/OgnlConstNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/ognl/OgnlConstNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/ognl/OgnlMethodFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/ognl/OgnlMethodFinder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/ognl/OgnlMethodNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/ognl/OgnlMethodNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/ognl/OgnlNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/ognl/OgnlNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/ognl/OgnlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/ognl/OgnlParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/partner/HtmlPartnerElementFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/partner/HtmlPartnerElementFinder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/partner/JavaPartnerElementFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/partner/JavaPartnerElementFinder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/partner/JwcPartnerElementFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/partner/JwcPartnerElementFinder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/partner/PartnerElementFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/partner/PartnerElementFinder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/psi/PsiMethodDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/psi/PsiMethodDecorator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/util/JavaPsiUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/util/JavaPsiUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/util/PsiElementFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/util/PsiElementFunctions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/util/PsiElementPredicates.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/util/PsiElementPredicates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/util/PsiFileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/util/PsiFileUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pl/holowko/intellij/tapestry/util/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/legacy/src/pl/holowko/intellij/tapestry/util/Utils.java" afterDir="false" />
+    <list default="true" id="296c424f-4037-41ad-9df4-b3143f871d9b" name="Changes" comment="chore: Add refactoring plan for migrating Tapestry 4.1 plugin to Tapestry 5.9">
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,9 +16,27 @@
   <component name="EmbeddingIndexingInfo">
     <option name="cachedIndexableFilesCount" value="40" />
   </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="$USER_HOME$/.gradle/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0" javaHome="$USER_HOME$/.sdkman/candidates/java/current" gradleVersion="9.0.0" />
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
@@ -104,11 +90,33 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1770297669871</updated>
-      <workItem from="1770297671113" duration="654000" />
+      <workItem from="1770297671113" duration="1233000" />
     </task>
+    <task id="LOCAL-00001" summary="chore: Moved project files, sources, and assets into the `legacy` directory.">
+      <option name="closed" value="true" />
+      <created>1770298345872</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1770298345873</updated>
+    </task>
+    <task id="LOCAL-00002" summary="chore: Add refactoring plan for migrating Tapestry 4.1 plugin to Tapestry 5.9">
+      <option name="closed" value="true" />
+      <created>1770298352050</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1770298352050</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="chore: Moved project files, sources, and assets into the `legacy` directory." />
+    <MESSAGE value="chore: Add refactoring plan for migrating Tapestry 4.1 plugin to Tapestry 5.9" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: Add refactoring plan for migrating Tapestry 4.1 plugin to Tapestry 5.9" />
   </component>
 </project>
