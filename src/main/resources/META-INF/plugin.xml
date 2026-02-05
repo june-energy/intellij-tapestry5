@@ -43,14 +43,12 @@
           ===== LINE MARKERS =====
           Shows gutter icons linking Java classes to TML templates and vice versa.
         -->
-        <!-- TODO: Phase 8 - Uncomment when line markers are implemented
         <codeInsight.lineMarkerProvider
             language="JAVA"
             implementationClass="com.juneenergy.intellij.tapestry5.markers.Tapestry5LineMarkerProvider"/>
         <codeInsight.lineMarkerProvider
             language="XML"
             implementationClass="com.juneenergy.intellij.tapestry5.markers.TmlLineMarkerProvider"/>
-        -->
 
         <!--
           ===== INSPECTIONS =====

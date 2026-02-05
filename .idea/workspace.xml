@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="296c424f-4037-41ad-9df4-b3143f871d9b" name="Changes" comment="chore: Add refactoring plan for migrating Tapestry 4.1 plugin to Tapestry 5.9">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="296c424f-4037-41ad-9df4-b3143f871d9b" name="Changes" comment="chore: Add refactoring plan for migrating Tapestry 4.1 plugin to Tapestry 5.9" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -90,7 +87,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1770297669871</updated>
-      <workItem from="1770297671113" duration="1233000" />
+      <workItem from="1770297671113" duration="1701000" />
     </task>
     <task id="LOCAL-00001" summary="chore: Moved project files, sources, and assets into the `legacy` directory.">
       <option name="closed" value="true" />
