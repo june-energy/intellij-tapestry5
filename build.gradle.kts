@@ -43,13 +43,13 @@ dependencies {
 
         // Plugin Verifier for compatibility checks
         pluginVerifier()
-
-        // Test framework for IntelliJ Platform tests
-        testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
     }
 
-    // Testing dependencies from version catalog
-    testImplementation(libs.bundles.testing)
+    // Testing dependencies - JUnit 5
+    testImplementation(libs.junit.api)
+    testImplementation(libs.junit.params)
+    testRuntimeOnly(libs.junit.engine)
+    testImplementation(libs.assertj.core)
 }
 
 // Java compilation configuration
