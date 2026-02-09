@@ -17,14 +17,12 @@
     <extensions defaultExtensionNs="com.intellij">
         <!--
           ===== CODE COMPLETION =====
-          Provides code completion for Tapestry property expressions in TML files.
+          Provides code completion for Tapestry component names and mixins in TML files.
         -->
-        <!-- TODO: Phase 4 - Uncomment when completion is implemented
         <completion.contributor
             language="XML"
             implementationClass="com.juneenergy.intellij.tapestry5.completion.Tapestry5CompletionContributor"
             order="first"/>
-        -->
 
         <!--
           ===== NAVIGATION =====
