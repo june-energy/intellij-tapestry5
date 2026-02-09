@@ -64,10 +64,16 @@
             implementation="com.juneenergy.intellij.tapestry5.xml.TapestryStandardResourceProvider"/>
 
         <!--
+          ===== IMPLICIT USAGE PROVIDER =====
+          Marks Tapestry classes with linked templates as "used" to prevent false unused warnings.
+        -->
+        <implicitUsageProvider
+            implementation="com.juneenergy.intellij.tapestry5.inspections.TapestryImplicitUsageProvider"/>
+
+        <!--
           ===== INSPECTIONS =====
           Code inspections for common Tapestry issues.
         -->
-        <!-- TODO: Phase 7 - Uncomment when inspections are implemented
         <localInspection
             language="JAVA"
             groupPath="Tapestry"
@@ -78,7 +84,6 @@
             implementationClass="com.juneenergy.intellij.tapestry5.inspections.MissingTemplateInspection"
             key="inspection.missing.template.name"
             bundle="messages.TapestryBundle"/>
-        -->
     </extensions>
 
     <!-- Actions registration -->

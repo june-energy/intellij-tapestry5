@@ -6,6 +6,10 @@
 
 IntelliJ IDEA plugin providing support for [Apache Tapestry 5.9](https://tapestry.apache.org/) web framework.
 
+![Apache TapestryLogo](src/main/resources/icons/apache_tapestry_full.svg)
+
+
+
 ## Features
 
 - **File Switcher**: Quick navigation between Java classes and TML templates (`Ctrl+Alt+Shift+T`)
@@ -13,6 +17,8 @@ IntelliJ IDEA plugin providing support for [Apache Tapestry 5.9](https://tapestr
 - **Navigation**: Go to Declaration from property expressions to Java code
 - **Line Markers**: Gutter icons linking Java classes to their TML templates
 - **Inspections**: Detect missing templates, invalid property expressions
+
+Forked from [Tapestry 4 IntelliJ Plugin](https://github.com/linuxswords/intellij-tapestry4)
 
 ## Supported Tapestry 5.x Features
 
