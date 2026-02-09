@@ -194,18 +194,24 @@ public final class TapestryComponentResolver {
     /**
      * Resolves a project-specific Tapestry component.
      *
-     * <p>Component names can include subpackages using dot notation:
+     * <p>Component names can include subpackages using dot or slash notation:
      * <ul>
      *     <li>{@code FeedbackComponent} - Component in the components package</li>
      *     <li>{@code ui.FeedbackComponent} - Component in components.ui package</li>
+     *     <li>{@code ui/FeedbackComponent} - Component via library mapping (ui → root.package)</li>
      * </ul>
      *
      * @param project the current project
-     * @param componentName the component name (may include subpackage)
+     * @param componentName the component name (may include subpackage or library prefix)
      * @return the resolved PsiClass, or {@code null} if not found
      */
     @Nullable
     public static PsiClass resolveProjectComponent(@NotNull Project project, @NotNull String componentName) {
+        // Check for library prefix notation (using / as separator, e.g., "ui/MyComponent")
+        if (componentName.contains("/")) {
+            return resolveComponentViaLibraryPrefix(project, componentName);
+        }
+
         // Handle subpackage notation (e.g., ui.FeedbackComponent)
         String className;
         String subPackage = "";
@@ -245,45 +251,56 @@ public final class TapestryComponentResolver {
     }
 
     /**
-     * Resolves a Tapestry mixin reference to its Java class.
+     * Resolves a component using library prefix notation.
      *
      * @param project the current project
-     * @param mixinName the mixin name (e.g., "ui/confirmation", "Autocomplete")
+     * @param componentName the component name with prefix (e.g., "ui/MyComponent", "ui/sub/MyComponent")
      * @return the resolved PsiClass, or {@code null} if not found
      */
     @Nullable
-    public static PsiClass resolveMixin(@NotNull Project project, @NotNull String mixinName) {
-        if (mixinName.isEmpty()) {
+    private static PsiClass resolveComponentViaLibraryPrefix(@NotNull Project project, @NotNull String componentName) {
+        int firstSlashIndex = componentName.indexOf('/');
+        int lastSlashIndex = componentName.lastIndexOf('/');
+
+        if (firstSlashIndex <= 0) {
             return null;
         }
 
-        // Handle subpackage notation (using / as separator in TML)
+        String prefix = componentName.substring(0, firstSlashIndex);
         String className;
         String subPackage = "";
 
-        // Mixins use / as path separator in TML (e.g., "ui/confirmation")
-        int lastSlashIndex = mixinName.lastIndexOf('/');
-        if (lastSlashIndex > 0) {
-            subPackage = mixinName.substring(0, lastSlashIndex).toLowerCase();
-            className = mixinName.substring(lastSlashIndex + 1);
+        if (lastSlashIndex > firstSlashIndex) {
+            // Multiple slashes: prefix/sub/ClassName
+            subPackage = componentName.substring(firstSlashIndex + 1, lastSlashIndex).replace('/', '.');
+            className = componentName.substring(lastSlashIndex + 1);
         } else {
-            className = mixinName;
+            // Single slash: prefix/ClassName
+            className = componentName.substring(firstSlashIndex + 1);
         }
 
-        // Capitalize first letter for class name convention
+        // Capitalize first letter
         className = capitalizeFirst(className);
 
-        // First try built-in mixins
-        String builtInFqn = CORELIB_MIXINS_PACKAGE + "." + className;
-        PsiClass builtInClass = JavaPsiFacade.getInstance(project).findClass(
-                builtInFqn,
-                GlobalSearchScope.allScope(project)
-        );
-        if (builtInClass != null) {
-            return builtInClass;
+        // Try via library mapping
+        PsiClass libraryClass = resolveViaLibraryMapping(project, prefix, subPackage, className, Tapestry5Conventions.COMPONENTS_PACKAGE);
+        if (libraryClass != null) {
+            return libraryClass;
         }
 
-        // Search for project mixins
+        // Fallback: search in project with prefix as subpackage
+        String fullSubPackage = subPackage.isEmpty() ? prefix : prefix + "." + subPackage;
+        return searchInProjectPackage(project, className, Tapestry5Conventions.COMPONENTS_PACKAGE, fullSubPackage);
+    }
+
+    /**
+     * Searches for a class in project packages with the given subpackage.
+     */
+    @Nullable
+    private static PsiClass searchInProjectPackage(@NotNull Project project,
+                                                    @NotNull String className,
+                                                    @NotNull String elementType,
+                                                    @NotNull String subPackage) {
         String javaFileName = className + ".java";
         Collection<com.intellij.openapi.vfs.VirtualFile> files = FilenameIndex.getVirtualFilesByName(
                 javaFileName,
@@ -298,7 +315,108 @@ public final class TapestryComponentResolver {
                 for (PsiClass psiClass : javaFile.getClasses()) {
                     if (className.equals(psiClass.getName())) {
                         String qualifiedName = psiClass.getQualifiedName();
-                        if (qualifiedName != null && isInMixinsPackage(qualifiedName, subPackage)) {
+                        if (qualifiedName != null) {
+                            String packageName = Tapestry5Conventions.getPackageName(qualifiedName).toLowerCase();
+                            String expectedSuffix = "." + elementType + "." + subPackage.toLowerCase();
+                            if (packageName.endsWith(expectedSuffix) || packageName.contains(expectedSuffix + ".")) {
+                                return psiClass;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Resolves a Tapestry mixin reference to its Java class.
+     *
+     * <p>Supports multiple resolution strategies:
+     * <ul>
+     *     <li>Built-in mixins (e.g., "Autocomplete" → org.apache.tapestry5.corelib.mixins.Autocomplete)</li>
+     *     <li>Library prefix mappings (e.g., "ui/DatePicker" → energy.june.commons.ui.mixins.DatePicker)</li>
+     *     <li>Project mixins with subpackages (e.g., "sub/MyMixin" → *.mixins.sub.MyMixin)</li>
+     * </ul>
+     *
+     * @param project the current project
+     * @param mixinName the mixin name (e.g., "ui/DatePicker", "Autocomplete")
+     * @return the resolved PsiClass, or {@code null} if not found
+     */
+    @Nullable
+    public static PsiClass resolveMixin(@NotNull Project project, @NotNull String mixinName) {
+        if (mixinName.isEmpty()) {
+            return null;
+        }
+
+        // Determine the class name and any prefix/subpackage
+        String className;
+        String prefix = "";
+        String subPackage = "";
+
+        // Mixins use / as path separator in TML (e.g., "ui/DatePicker" or "sub/MyMixin")
+        int firstSlashIndex = mixinName.indexOf('/');
+        int lastSlashIndex = mixinName.lastIndexOf('/');
+
+        if (firstSlashIndex > 0) {
+            prefix = mixinName.substring(0, firstSlashIndex);
+            
+            if (lastSlashIndex > firstSlashIndex) {
+                // Multiple slashes: prefix/sub/ClassName
+                subPackage = mixinName.substring(firstSlashIndex + 1, lastSlashIndex).replace('/', '.');
+                className = mixinName.substring(lastSlashIndex + 1);
+            } else {
+                // Single slash: prefix/ClassName
+                className = mixinName.substring(firstSlashIndex + 1);
+            }
+        } else {
+            className = mixinName;
+        }
+
+        // Capitalize first letter for class name convention
+        className = capitalizeFirst(className);
+
+        // First try built-in mixins (only if no prefix)
+        if (prefix.isEmpty()) {
+            String builtInFqn = CORELIB_MIXINS_PACKAGE + "." + className;
+            PsiClass builtInClass = JavaPsiFacade.getInstance(project).findClass(
+                    builtInFqn,
+                    GlobalSearchScope.allScope(project)
+            );
+            if (builtInClass != null) {
+                return builtInClass;
+            }
+        }
+
+        // Try to resolve using library mapping if prefix exists
+        if (!prefix.isEmpty()) {
+            PsiClass libraryClass = resolveViaLibraryMapping(project, prefix, subPackage, className, Tapestry5Conventions.MIXINS_PACKAGE);
+            if (libraryClass != null) {
+                return libraryClass;
+            }
+        }
+
+        // Search for project mixins
+        String javaFileName = className + ".java";
+        Collection<com.intellij.openapi.vfs.VirtualFile> files = FilenameIndex.getVirtualFilesByName(
+                javaFileName,
+                GlobalSearchScope.projectScope(project)
+        );
+
+        PsiManager psiManager = PsiManager.getInstance(project);
+
+        // Build the full subpackage path for matching
+        String fullSubPackage = prefix.isEmpty() ? subPackage : 
+                (subPackage.isEmpty() ? prefix : prefix + "." + subPackage);
+
+        for (com.intellij.openapi.vfs.VirtualFile file : files) {
+            PsiFile psiFile = psiManager.findFile(file);
+            if (psiFile instanceof com.intellij.psi.PsiJavaFile javaFile) {
+                for (PsiClass psiClass : javaFile.getClasses()) {
+                    if (className.equals(psiClass.getName())) {
+                        String qualifiedName = psiClass.getQualifiedName();
+                        if (qualifiedName != null && isInMixinsPackage(qualifiedName, fullSubPackage.toLowerCase())) {
                             return psiClass;
                         }
                     }
@@ -307,6 +425,42 @@ public final class TapestryComponentResolver {
         }
 
         return null;
+    }
+
+    /**
+     * Resolves a class using library mapping.
+     *
+     * @param project the current project
+     * @param prefix the library prefix (e.g., "ui")
+     * @param subPackage additional subpackage path (e.g., "sub")
+     * @param className the class name (e.g., "DatePicker")
+     * @param elementType the Tapestry element type ("mixins", "components", "pages")
+     * @return the resolved PsiClass, or {@code null} if not found
+     */
+    @Nullable
+    private static PsiClass resolveViaLibraryMapping(@NotNull Project project,
+                                                      @NotNull String prefix,
+                                                      @NotNull String subPackage,
+                                                      @NotNull String className,
+                                                      @NotNull String elementType) {
+        String rootPackage = TapestryLibraryMappingResolver.resolvePrefix(project, prefix);
+        if (rootPackage == null) {
+            return null;
+        }
+
+        // Build the fully qualified name: rootPackage.elementType[.subPackage].ClassName
+        StringBuilder fqnBuilder = new StringBuilder(rootPackage);
+        fqnBuilder.append(".").append(elementType);
+        if (!subPackage.isEmpty()) {
+            fqnBuilder.append(".").append(subPackage.toLowerCase());
+        }
+        fqnBuilder.append(".").append(className);
+
+        String fqn = fqnBuilder.toString();
+        return JavaPsiFacade.getInstance(project).findClass(
+                fqn,
+                GlobalSearchScope.allScope(project)
+        );
     }
 
     /**
