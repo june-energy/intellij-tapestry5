@@ -30,14 +30,9 @@
           ===== NAVIGATION =====
           Provides Go to Declaration for property expressions and component references.
         -->
-        <!-- TODO: Phase 5 - Uncomment when navigation is implemented
-        <gotoDeclarationHandler
-            implementation="com.juneenergy.intellij.tapestry5.navigation.PropertyExpressionGoToHandler"
-            order="first"/>
-        <gotoDeclarationHandler
-            implementation="com.juneenergy.intellij.tapestry5.navigation.ComponentReferenceGoToHandler"
-            order="first"/>
-        -->
+        <psi.referenceContributor
+            language="XML"
+            implementation="com.juneenergy.intellij.tapestry5.references.TmlReferenceContributor"/>
 
         <!--
           ===== LINE MARKERS =====
@@ -49,6 +44,26 @@
         <codeInsight.lineMarkerProvider
             language="XML"
             implementationClass="com.juneenergy.intellij.tapestry5.markers.TmlLineMarkerProvider"/>
+        <codeInsight.lineMarkerProvider
+            language="XML"
+            implementationClass="com.juneenergy.intellij.tapestry5.markers.TmlComponentLineMarkerProvider"/>
+
+        <!--
+          ===== XML NAMESPACE SUPPORT =====
+          Provides implicit namespace descriptors for Tapestry namespaces.
+        -->
+        <xml.implicitNamespaceDescriptorProvider
+            implementation="com.juneenergy.intellij.tapestry5.xml.TapestryImplicitNamespaceDescriptorProvider"/>
+
+        <!--
+          ===== STANDARD RESOURCE PROVIDER =====
+          Auto-registers Tapestry schema URIs to prevent "URI is not registered" warnings.
+          Handles namespaces like:
+            - xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+            - xmlns:p="tapestry:parameter"
+        -->
+        <standardResourceProvider
+            implementation="com.juneenergy.intellij.tapestry5.xml.TapestryStandardResourceProvider"/>
 
         <!--
           ===== INSPECTIONS =====
