@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="296c424f-4037-41ad-9df4-b3143f871d9b" name="Changes" comment="Update `.intellijPlatform/self-update.lock` and adjust `workspace.xml` configurations.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/pluginIcon.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/pluginIcon_dark.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.intellijPlatform/self-update.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.intellijPlatform/self-update.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/icons/apache_tapestry_icon.ai" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/icons/apache_tapestry_icon.ai" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -200,7 +200,7 @@
       <workItem from="1770652764851" duration="54000" />
       <workItem from="1770668819609" duration="2484000" />
       <workItem from="1770673277035" duration="274000" />
-      <workItem from="1770673566648" duration="1668000" />
+      <workItem from="1770673566648" duration="2024000" />
     </task>
     <task id="LOCAL-00001" summary="chore: Moved project files, sources, and assets into the `legacy` directory.">
       <option name="closed" value="true" />
