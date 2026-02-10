@@ -385,15 +385,24 @@ symbol:tapestry.version → Tapestry symbol value
         <standardResourceProvider
             implementation="...xml.TapestryStandardResourceProvider"/>
         
+        <!-- Implicit Usage Provider -->
+        <implicitUsageProvider
+            implementation="...inspections.TapestryImplicitUsageProvider"/>
+        
         <!-- Inspections -->
         <localInspection language="JAVA"
             implementationClass="...inspections.MissingTemplateInspection"/>
+        
+        <!-- Notifications -->
+        <notificationGroup id="Tapestry5Notifications" displayType="BALLOON"/>
     </extensions>
     
     <actions>
         <action id="tapestry5.switcher" 
                 class="...Tapestry5Switcher"
                 text="Switch Tapestry TML/Java">
+            <add-to-group group-id="GoToMenu" anchor="after" relative-to-action="GotoRelated"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
             <keyboard-shortcut first-keystroke="control alt shift T" keymap="$default"/>
         </action>
     </actions>
@@ -455,6 +464,7 @@ symbol:tapestry.version → Tapestry symbol value
 
 8. **Inspections** ✅
    - `MissingTemplateInspection.java`
+   - `TapestryImplicitUsageProvider.java`
 
 ---
 
@@ -467,13 +477,29 @@ symbol:tapestry.version → Tapestry symbol value
 | Phase 3: File Switcher | ✅ COMPLETED | 100% |
 | Phase 4: Code Completion | ✅ COMPLETED | 100% |
 | Phase 5: Navigation | ✅ COMPLETED | 100% |
-| Phase 6: References | 🔄 PARTIAL | 70% |
-| Phase 7: Inspections | 🔄 PARTIAL | 33% |
+| Phase 6: References | ✅ COMPLETED | 100% |
+| Phase 7: Inspections | 🔄 PARTIAL | 50% |
 | Phase 8: Line Markers | ✅ COMPLETED | 100% |
 | Phase 9: Testing | 🔄 PARTIAL | 40% |
-| Phase 10: Documentation | 🔄 PARTIAL | 60% |
+| Phase 10: Documentation | ✅ COMPLETED | 100% |
 | XML Namespace Support | ✅ COMPLETED | 100% |
-| **Overall** | **🔄 IN PROGRESS** | **~85%** |
+| **Overall** | **🔄 IN PROGRESS** | **~90%** |
+
+### What's Working
+- ✅ File switching between Java ↔ TML
+- ✅ Code completion for components, mixins, and tags
+- ✅ Go to Declaration from TML to Java classes
+- ✅ Gutter icons for navigation (Java ↔ TML, component references)
+- ✅ Missing template inspection with quick fix
+- ✅ Implicit usage provider (no false "unused" warnings)
+- ✅ XML namespace support (no URI warnings)
+
+### What's Planned (Future Enhancements)
+- 📋 Property expression completion and navigation (`${...}`)
+- 📋 Event handler method completion and markers
+- 📋 Missing Java class inspection for TML files
+- 📋 Invalid property expression inspection
+- 📋 Integration tests for completion and navigation
 
 ---
 
