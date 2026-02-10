@@ -106,7 +106,9 @@ intellijPlatform {
     // Plugin verification configuration
     pluginVerification {
         ides {
-            recommended()
+            // Use specific IDE versions that exist, based on platformVersion (2024.1)
+            // Format: "IC-2024.1" for IntelliJ IDEA Community
+            ide("IC", platformVersion)
         }
     }
 

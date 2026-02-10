@@ -1,0 +1,138 @@
+# Cline Rules for intellij-tapestry5
+
+## Project Overview
+
+This is an **IntelliJ IDEA plugin** providing support for the Apache Tapestry 5.9 web framework. The plugin enhances the developer experience when working with Tapestry projects by providing navigation, code completion, inspections, and other IDE features.
+
+- **Plugin ID**: `com.juneenergy.intellij.tapestry5`
+- **Target IDE**: IntelliJ IDEA 2024.1+ (Community and Ultimate)
+- **Java Version**: 17+
+- **Build System**: Gradle with Kotlin DSL
+
+## Architecture & Code Structure
+
+### Source Organization
+```
+src/main/java/com/juneenergy/intellij/tapestry5/
+├── Tapestry5Switcher.java          # Main action for TML/Java file switching
+├── completion/                      # Code completion contributors
+├── inspections/                     # Code inspections and implicit usage
+├── markers/                         # Gutter line marker providers
+├── references/                      # PSI reference contributors
+├── util/                            # Utility classes for conventions & file handling
+└── xml/                             # XML namespace and schema support
+```
+
+### Key Components
+- **Actions**: `Tapestry5Switcher` - switches between TML and Java files (Ctrl+Alt+Shift+T)
+- **Completion**: `Tapestry5CompletionContributor` - completes component names and mixins
+- **Line Markers**: Gutter icons linking Java ↔ TML files and component references
+- **References**: Navigation from TML components to Java classes
+- **Inspections**: Missing template detection for Tapestry pages/components
+
+## Development Guidelines
+
+### IntelliJ Platform Plugin Development
+1. **Use IntelliJ Platform APIs correctly**:
+   - Read operations on PSI must be wrapped in `ReadAction.compute()` or run on EDT
+   - Write operations must use `WriteCommandAction`
+   - Never access PSI from background threads without proper read lock
+   
+2. **Extension Points** are registered in `src/main/resources/META-INF/plugin.xml`
+   - All new features must be registered as proper extension points
+   - Plugin metadata is configured in `build.gradle.kts`
+
+3. **Notification API**: Use `NotificationGroupManager` for user notifications
+   - Notification group `Tapestry5Notifications` is registered in plugin.xml
+
+### Tapestry 5.x Conventions
+The plugin follows Tapestry 5.x conventions:
+- Templates: `.tml` files in same package as Java class
+- Pages: Classes in `pages` package or with `@Page` annotation
+- Components: Classes in `components` package or with `@Component` annotation
+- Mixins: Classes in `mixins` package
+- Property expressions: `${propertyName}`, `prop:propertyName`
+
+### Code Style
+- Use `@NotNull` and `@Nullable` annotations from `org.jetbrains.annotations`
+- Prefer Java streams over external collections libraries
+- Use `Optional` from Java standard library (not Guava)
+- Follow IntelliJ coding conventions for plugin development
+
+## Building & Testing
+
+### Build Commands
+```bash
+# Build the plugin
+./gradlew build
+
+# Run IntelliJ IDEA with the plugin installed
+./gradlew runIde
+
+# Run tests
+./gradlew test
+
+# Verify plugin compatibility
+./gradlew verifyPlugin
+
+# Build distribution zip
+./gradlew buildPlugin
+```
+
+### Testing
+- Unit tests use JUnit 5 with AssertJ assertions
+- Test files are in `src/test/java/` mirroring the main source structure
+- Use `BasePlatformTestCase` for IntelliJ platform integration tests
+
+## Configuration Files
+
+| File | Purpose |
+|------|---------|
+| `build.gradle.kts` | Main build configuration with IntelliJ Platform plugin |
+| `gradle.properties` | Version numbers and Gradle settings |
+| `gradle/libs.versions.toml` | Dependency version catalog |
+| `src/main/resources/META-INF/plugin.xml` | Plugin extension points and actions |
+| `src/main/resources/messages/TapestryBundle.properties` | Localized strings |
+
+## Git Workflow
+
+- Main branch: `main`
+- Use feature branches: `feature/feature-name`
+- Commit messages should be descriptive and reference issues when applicable
+- Repository: `git@github.com:june-energy/intellij-tapestry5.git`
+
+## Important Notes
+
+1. **Compatibility**: Plugin targets IntelliJ 2024.1+ (build 241+), no upper limit
+2. **Dependencies**: Requires bundled `com.intellij.java` plugin
+3. **File Types**: TML files are handled as XML dialect
+4. **Icons**: Plugin icons are in `src/main/resources/icons/` and `META-INF/`
+
+## Common Patterns
+
+### Finding Partner Files
+```java
+// Use Tapestry5FileUtils to find related TML/Java files
+VirtualFile tmlFile = Tapestry5FileUtils.findTmlForJavaClass(project, javaClass);
+PsiClass javaClass = Tapestry5FileUtils.findJavaClassForTml(project, tmlFile);
+```
+
+### Checking Tapestry Conventions
+```java
+// Use Tapestry5Conventions to check if class is page/component
+boolean isPage = Tapestry5Conventions.isPageClass(psiClass);
+boolean isComponent = Tapestry5Conventions.isComponentClass(psiClass);
+```
+
+### Resolving Component References
+```java
+// Use TapestryComponentResolver to find component classes
+PsiClass componentClass = TapestryComponentResolver.resolve(project, componentName, currentFile);
+```
+
+## Refactoring Status
+
+See `REFACTORING_PLAN.md` for detailed status. Current implementation is ~85% complete:
+- ✅ Core infrastructure, file switcher, completion, navigation, line markers
+- 🔄 Partial: Advanced inspections, property references, comprehensive testing
+- 📋 Planned: Event handler completion, property expression navigation

@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="296c424f-4037-41ad-9df4-b3143f871d9b" name="Changes" comment="Update `.intellijPlatform/self-update.lock` and adjust `workspace.xml` configurations.">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/pluginIcon_dark.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/REFACTORING_PLAN.md" beforeDir="false" afterPath="$PROJECT_DIR$/REFACTORING_PLAN.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/pluginIcon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/pluginIcon_dark.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/icons/apache_tapestry_icon.ai" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/icons/apache_tapestry_icon.ai" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="42" />
+    <option name="cachedIndexableFilesCount" value="53" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExternalProjectsData">
@@ -110,9 +110,6 @@
     <option name="endsOfQuotaMs" value="1770768114613" />
     <option name="spentUsd" value="0.0244761" />
   </component>
-  <component name="RecapUselessUpdatesCounter">
-    <option name="suspendCountdown" value="8" />
-  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/META-INF" />
@@ -202,7 +199,8 @@
       <workItem from="1770651489451" duration="1251000" />
       <workItem from="1770652764851" duration="54000" />
       <workItem from="1770668819609" duration="2484000" />
-      <workItem from="1770673277035" duration="32000" />
+      <workItem from="1770673277035" duration="274000" />
+      <workItem from="1770673566648" duration="1668000" />
     </task>
     <task id="LOCAL-00001" summary="chore: Moved project files, sources, and assets into the `legacy` directory.">
       <option name="closed" value="true" />
