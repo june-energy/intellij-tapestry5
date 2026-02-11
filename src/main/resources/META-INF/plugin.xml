@@ -84,6 +84,14 @@
             implementationClass="com.juneenergy.intellij.tapestry5.inspections.MissingTemplateInspection"
             key="inspection.missing.template.name"
             bundle="messages.TapestryBundle"/>
+
+        <!--
+          ===== TML FILE CHANGE LISTENER =====
+          Listens for TML file changes and triggers a module rebuild.
+          This ensures Tapestry pages can be properly reloaded after template changes.
+        -->
+        <postStartupActivity
+            implementation="com.juneenergy.intellij.tapestry5.listeners.TmlFileChangeStartupActivity"/>
     </extensions>
 
     <!-- Actions registration -->
